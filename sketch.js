@@ -1,23 +1,38 @@
-const board = document.getElementById("sketchboard");
+const board = document.getElementById("Sketchboard");
 
 const divList = [];
 const ArrayOfDivList = [];
 
-function createGrid () {
-    for (let j = 0; j < 16; j++) {
-        ArrayOfDivList[j] = document.createElement("div");
-        document.getElementById("Sketchboard").appendChild(ArrayOfDivList[j]);
-        
-        for (let i = 0; i < 16; i++) {
+let gameColor;
 
+function setColor(color) {
+    gameColor = color;
+}
+
+
+
+function createGrid (x, y) {
+
+    for (let j = 0; j < x; j++) {
+        
+        let row = document.createElement("div");
+
+        document.getElementById("Sketchboard").appendChild(row);
+        
+        for (let i = 0; i < y; i++) {
+            
+            
+            
             divList[i] = document.createElement("div");
-            ArrayOfDivList[j].appendChild(divList[i]);
 
             divList[i].style.display = "flex";
             
-            divList[i].style.height = "10px";
-            divList[i].style.width = "10px";
+            divList[i].style.height = "1px";
+            divList[i].style.width = "1px";
             divList[i].style.backgroundColor = "red";
+
+            row.appendChild(divList[i]);
+            
 
             
 
@@ -25,10 +40,14 @@ function createGrid () {
             console.log("pix appended");
         }
         ArrayOfDivList[j] = divList;
+        
+        
     }
 
 
-}
+};
 
 
-createGrid();
+
+
+createGrid(100, 100);
