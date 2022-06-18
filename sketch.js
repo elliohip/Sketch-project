@@ -3,11 +3,19 @@ const board = document.getElementById("Sketchboard");
 const divList = [];
 const ArrayOfDivList = [];
 
+let input = document.getElementById("color");
+let colorButton = document.getElementById("submit-button");
+
 let gameColor;
+let width;
+let height;
+let size = width * height;
 
 function setColor(color) {
     gameColor = color;
 }
+
+
 
 
 
@@ -31,8 +39,10 @@ function createGrid (x, y) {
             divList[i].style.width = "1px";
             divList[i].style.backgroundColor = "red";
 
+            divList[i];
+
             row.appendChild(divList[i]);
-            
+
 
             
 
@@ -48,6 +58,10 @@ function createGrid (x, y) {
 };
 
 
+function askSize() {
+    width = prompt("Write your x value: ");
+    height = prompt("Write your y value: ");
+}
 
-
-createGrid(100, 100);
+askSize();
+createGrid(width, height);
