@@ -4,10 +4,16 @@ body {
 }
 
 div#Sketchboard{
-    height: auto;
+    height: 900px;
+    width: 900px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+
+    flex-basis: auto;
+    flex-grow:1;
+    flex-shrink:1;
+
+    border-width: 1px;
     
     
     flex-wrap: wrap;
