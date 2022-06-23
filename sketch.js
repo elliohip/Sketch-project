@@ -2,31 +2,100 @@ const board = document.getElementById("Sketchboard");
 
 const divList = [];
 const ArrayOfDivList = [];
+const wholeBoard = [];
 
 let input = document.getElementById("color");
 let colorButton = document.getElementById("submit-button");
 
-let gameColor = "black";
+let c = 0;
+
+
+let isDrawing = false;
+let gameColor = prompt("what color do you want to draw?");
 let width;
 let height;
+let evtChecker;
 
 let colorChecker = (gameColor != undefined);
 
 
+function askSize() { 
+    console.log("event fired");
+    width = prompt("Write your x value: ");
+    height = prompt("Write your y value: ");
+}
 
+function askColor() {
+    gameColor = prompt("what color do you want to draw? ");
+    console.log(gameColor);
+}
+
+document.getElementById("submit-button").addEventListener("click", askColor);
+
+/*
+document.getElementById("size-button").addEventListener("click", askSize());
+*/
 
 function changeColor(ev) {
+    
+    
 
-    ev.currentTarget.backgroundColor = gameColor;
+    ev.currentTarget.style.backgroundColor = gameColor;
 
+    console.log("color changed");
+    
+    
 };
 
+function setDrawing(evt) {
+
+    
+
+
+    // event chacker to check if this event has been fired after process
+
+    console.log("event fired");
+    
+
+   
+    if (!isDrawing) {
+        isDrawing = true;
+        drawing();
+    } else {
+        isDrawing = false;
+        drawing();
+    }
+
+    console.log(isDrawing);
+
+}
+
+function drawing() {
+    if (isDrawing) {
+        
+        for (i = 0; i < width * height; i++) {
+
+            
+            wholeBoard[i].addEventListener("mouseleave", changeColor);
+            
+        }
+    }
+    else if (!isDrawing) {
+        for (i = 0; i < width * height; i++) {
+
+            
+            wholeBoard[i].removeEventListener("mouseleave", changeColor);
+            
+        }
+    }
+}
 
 
 function setColor() {
-    gameColor = document.getElementById("color").value;
 
-    colorChecker = true;
+    
+    
+    
 
     console.log(gameColor);
 };
@@ -53,38 +122,47 @@ function createGrid (x, y) {
         
         for (let i = 0; i < y; i++) {
 
+            p = document.createElement("div");
             
             
             
-            divList[i] = document.createElement("div");
 
 
-            divList[i].style.display.alignSelf = "center";
+            p.style.display.alignSelf = "center";
 
 
-            divList[i].style.backgroundColor = "black";
+            p.style.backgroundColor = "black";
 
-            
-            divList[i].style.borderColor = "black";
-            divList[i].style.borderWidth = "1px";
-
-            divList[i].style.width = pixw + "%";
-            divList[i].style.height = pixh + "%";
-            
-
-
-            divList[i].addEventListener("mouseover", changeColor)
-
-
-        
-
-            document.getElementById("Sketchboard").appendChild(divList[i]);
-
+            p.className = "sketchPix";
 
             
 
             
-            console.log("pix appended");
+
+            
+            p.style.borderColor = "black";
+            p.style.borderWidth = "1px";
+
+            p.style.width = pixw + "%";
+            p.style.height = pixh + "%";
+
+
+            document.getElementById("Sketchboard").appendChild(p);
+
+            
+            // p.addEventListener("click", setDrawing);
+            
+
+
+
+            divList[i] = p;
+            
+            wholeBoard[c] = p;
+
+            c++;
+
+            
+            
         }
 
         ArrayOfDivList[j] = divList;
@@ -92,20 +170,27 @@ function createGrid (x, y) {
         console.log("made Row");
     }
 
+    
+
 
 };
 
 
-function askSize() {
-    width = prompt("Write your x value: ");
-    height = prompt("Write your y value: ");
-}
-
-askSize();
 
 
 
 
-if (colorChecker) {
+
+
+
+function main() {
+    askSize();
     createGrid(width, height);
+    askColor();
+
+    document.getElementById("Sketchboard").addEventListener("click", setDrawing);
+    
+
 }
+
+main();
