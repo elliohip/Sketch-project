@@ -4,8 +4,9 @@ const divList = [];
 const ArrayOfDivList = [];
 const wholeBoard = [];
 
-let input = document.getElementById("color");
+
 let colorButton = document.getElementById("submit-button");
+let sizeButton = document.getElementById("size-button");
 
 let c = 0;
 
@@ -17,6 +18,18 @@ let height;
 let evtChecker;
 
 let colorChecker = (gameColor != undefined);
+
+
+sizeButton.addEventListener("click", sizeBtn);
+
+colorButton.addEventListener("click", askColor);
+
+function sizeBtn() {
+    askSize();
+    createGrid(width, height);
+}
+
+
 
 
 function askSize() { 

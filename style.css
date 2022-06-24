@@ -27,4 +27,7 @@ button#submit-button {
     margin-right: 25px;
 }
 
-
+input#size-button{
+    color:darkgrey;
+    background-color:dodgerblue;
+}
